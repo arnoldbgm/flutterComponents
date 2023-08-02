@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InputPage extends StatelessWidget {
-  const InputPage({super.key});
+class InputPage extends StatefulWidget {
+  @override
+  State<InputPage> createState() => _InputPageState();
+}
+
+class _InputPageState extends State<InputPage> {
+  TextEditingController _controllerName = new TextEditingController();
+  TextEditingController _controllerDate = new TextEditingController();
+
+  String valueAux = "Spiderman";
+
+  bool isInvisible = true;
+  String name = "";
+
+  List<String> superHeroes = ["Spiderman", "Batman", "WonderWoman"];
 
   @override
   Widget build(BuildContext context) {
@@ -155,10 +168,103 @@ class InputPage extends StatelessWidget {
                   "Opciones",
                 ),
               ),
+              //Editing TextField
+              TextField(
+                obscureText: isInvisible,
+                decoration: InputDecoration(
+                  hintText: "Ingrese su contraseña",
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      isInvisible = !isInvisible;
+                      setState(() {});
+                    },
+                    icon: isInvisible
+                        ? const Icon(Icons.remove_red_eye_sharp)
+                        : const Icon(Icons.remove_red_eye_outlined),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              TextField(
+                controller: _controllerName,
+                keyboardType: TextInputType.name,
+                decoration: const InputDecoration(
+                  label: Text("Ingresar tu nombre"),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  print(_controllerName.text);
+                },
+                child: const Text("Presiona el texto"),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              TextField(
+                controller: _controllerDate,
+                decoration: const InputDecoration(
+                    hintText: "Fecha de nacimiento",
+                    suffixIcon: Icon(Icons.date_range)),
+                onTap: () {
+                  print("prueba de valores");
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  selectDate();
+                },
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              DropdownButton(
+                value: valueAux,
+                hint: const Text("Valores desplegables"),
+                items: superHeroes
+                    .map((e) => DropdownMenuItem(child: Text(e), value: e))
+                    .toList(),
+                onChanged: (String? value) {
+                  valueAux = value!;
+                  setState(() {});
+                },
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  selectDate() async {
+    DateTime? dateSelected = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2024),
+    );
+    if (dateSelected != null) {
+      this._controllerDate.text = dateSelected.toString().substring(0, 10);
+      setState(() {});
+    }
+  }
+
+  List<DropdownMenuItem<String>> getSuperheroesData() {
+    List<DropdownMenuItem<String>> items = [];
+    superHeroes.forEach((element) {
+      items.add(DropdownMenuItem(
+        child: Text(element),
+        value: element,
+      ));
+    });
+    return items;
+  }
+
+  List<DropdownMenuItem<String>> getSuperheroesMap() {
+    return superHeroes.map((superhero) {
+      return DropdownMenuItem(
+        child: Text(superhero),
+        value: superhero,
+      );
+    }).toList();
   }
 }
