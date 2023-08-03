@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_components/pages/alert_page.dart';
 import 'package:flutter_application_components/pages/avatar_page.dart';
 import 'package:flutter_application_components/pages/card_page.dart';
+import 'package:flutter_application_components/pages/grid_page.dart';
 import 'package:flutter_application_components/pages/inputs_page.dart';
 import 'package:flutter_application_components/pages/list_page.dart';
 import 'package:flutter_application_components/pages/reto_page.dart';
@@ -65,6 +66,10 @@ class HomePage extends StatelessWidget {
               ItemComponentWidget(
                 titleText: "List Page",
                 toPage: ListPage(),
+              ),
+              ItemComponentWidget(
+                titleText: "Grid Page",
+                toPage: GridPage(),
               ),
             ],
           ),
