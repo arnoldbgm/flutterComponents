@@ -20,7 +20,7 @@ class GridPage extends StatelessWidget {
       {
         "name": "Superman",
         "image":
-            "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/980px/public/media/image/2021/06/superman-2354819.jpg",
+            "https://static.wikia.nocookie.net/marvel_dc/images/a/a5/Superman_Vol_5_1_Textless.jpg/revision/latest?cb=20180711061148",
         "age": 39,
         "secretIdentity": "Jane Wilson",
         "powers": [
@@ -76,7 +76,9 @@ class GridPage extends StatelessWidget {
                   child: Text(
                     e['name'],
                     style: GoogleFonts.montserrat(
-                        fontSize: 20, color: Colors.white),
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
                   ),
                 ))
